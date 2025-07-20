@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Escape the Haunted Room</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* Background Video Styling */
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* full screen, no black bars */
+      z-index: -2;
+    }
+
+    /* 🔮 Dark overlay on top of video for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: -1;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #f2f2f2;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Creepster', cursive;
+      font-size: 4rem;
+      color: #ff2c2c;
+      text-shadow: 0 0 20px #ff0000;
+      margin-bottom: 20px;
+    }
+
+    p.story {
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .puzzle-box {
+      background: rgba(20, 20, 20, 0.8);
+      border: 2px solid #990000;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    label {
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 10px;
+      color: #ffcccc;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #660000;
+      background-color: #1c1c1c;
+      color: #ff2c2c;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #990000;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ff2c2c;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+      box-shadow: 0 0 20px #ff0000;
+    }
+
+    .math-riddle {
+      margin-top: 25px;
+      font-size: 1rem;
+      text-decoration: underline;
+      cursor: pointer;
+      color: #ff6666;
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!--  Background Video -->
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="https://v1.pinimg.com/videos/iht/720p/84/8c/1f/848c1f5324517e8480b8a23a99a04199.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+ <!-- Main Content  -->
+  <h1>Escape the Haunted Room</h1>
+  <p class="story">The door creaks shut... You're trapped. Solve the puzzles before <em>it</em> finds you.</p>
+
+  <div class="puzzle-box">
+    <label for="password">🔑 You're locked in. Solve this to get out!</label>
+    <input type="text" id="password" placeholder="Hint: Start from open">
+    <br>
+    <button onclick="checkPassword()">Unlock Door</button>
+    <p class="math-riddle" onclick="solveRiddle()">🧠 Bonus Puzzle: Dare to answer?</p>
+    <div style="margin-top: 30px; display: flex; gap: 20px; justify-content: center;">
+      <button onclick="window.location.href='index.html'">🏠 Back to Home</button>
+      <button id="nextButton" disabled onclick="window.location.href='es6.html'"
+      style="opacity: 0.5; pointer-events: none; cursor: not-allowed;">
+      ➡️ Go To Room 2
+    </button>    
+    </div>
+    
+  </div>
+
+  <!-- 🕯️ Spooky Background Audio -->
+  <audio id="bgAudio" autoplay loop>
+  <source src="wrong-place-129242 (1).mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+  <script>
+    // 🔊 Play background audio after first user interaction
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgAudio = document.getElementById("bgAudio");
+
+      // Allow sound after user clicks anywhere
+      document.body.addEventListener("click", () => {
+        bgAudio.volume = 0.5;
+        bgAudio.play().catch((err) => {
+          console.log("Autoplay failed:", err);
+        });
+      }, { once: true });
+    });
+      document.getElementById("bgAudio").volume = 0.4;
+
+      function checkPassword() {
+  const input = document.getElementById("password").value.trim();
+  if (input === "open123") {
+    alert("✅ The cursed door opened... You escaped... for now.");
+
+    // ✅ Enable the Next Room button
+    const nextBtn = document.getElementById("nextButton");
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = "1";
+    nextBtn.style.pointerEvents = "auto";
+    nextBtn.style.cursor = "pointer";
+    nextBtn.style.boxShadow = "0 0 10px #00ff88";
+  } else {
+    alert("❌ Wrong... The shadows grow stronger around you.");
+  }
+}
+
+
+    function solveRiddle() {
+      const answer = prompt("👁️ What is 3 × 7 + 1? Speak quickly!");
+      if (answer === "22") {
+        alert("🎉 Correct! The spirits whisper: 'You are worthy...'");
+      } else {
+        alert("😈 Wrong! The lights flicker... Something moves behind you.");
+      }
+    }
+  </script>
+
+</body>
+</html>
