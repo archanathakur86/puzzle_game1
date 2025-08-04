@@ -455,4 +455,5 @@ if (roomIndex > 0) {
     updateStats();
     showToast('Welcome! Choose your first challenge.', 'success');
   });
-  
+  localStorage.setItem("room2Completed", "true");
+
