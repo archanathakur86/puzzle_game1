@@ -334,5 +334,23 @@
       </div>
     </div>
   </div>
+  <script>
+    // Simulate Room 1 completion - you would normally trigger this from inside escape.html when completed
+    // Example: localStorage.setItem("room1Completed", "true");
+  
+    document.getElementById("room2-btn").addEventListener("click", function (e) {
+      if (localStorage.getItem("room1Completed") !== "true") {
+        e.preventDefault();
+        alert("🚫 Please complete Room 1 before entering Room 2!");
+      }
+    });
+  
+    document.getElementById("room3-btn").addEventListener("click", function (e) {
+      if (localStorage.getItem("room2Completed") !== "true") {
+        e.preventDefault();
+        alert("🚫 Please complete Room 2 before entering Room 3!");
+      }
+    });
+  </script>  
 </body>
 </html>
