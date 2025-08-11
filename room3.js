@@ -32,7 +32,7 @@ class PuzzleTimer {
     };
   }
   
-  // Puzzle Definitions with ES6 Arrow Functions
+
   const puzzles = {
     typing: {
       id: 'typing',
@@ -41,11 +41,10 @@ class PuzzleTimer {
       color: 'typing',
       generate: () => {
         const sentences = [
-          { q: 'Type: "The quick brown fox jumps over the lazy dog."', a: 'The quick brown fox jumps over the lazy dog.', h: 'Classic sentence with every alphabet' },
-          { q: 'Type: "Practice makes perfect."', a: 'Practice makes perfect.', h: 'Be precise, case and punctuation matter' },
-          { q: 'Type: "JavaScript is fun!"', a: 'JavaScript is fun!', h: 'Don’t miss the exclamation mark!' },
-          { q: 'Type: "Speed and accuracy."', a: 'Speed and accuracy.', h: 'Watch for spacing' },
-          { q: 'Type: "Typing tests are cool."', a: 'Typing tests are cool.', h: 'Easy one. Go!' }
+          { q: 'Type: "Learning never exhausts the mind."', a: 'Learning never exhausts the mind', h: 'A famous quote by Leonardo da Vinci' },
+          { q: 'Type: "The quick brown fox jumps over the lazy dog."', a: 'The quick brown fox jumps over the lazy dog', h: 'Classic sentence with every alphabet' },
+          { q: 'Type: "Consistency beats intensity."', a: 'Consistency beats intensity', h: 'Small efforts daily > big bursts rarely' },
+          { q: 'Type: "JavaScript is fun and versatile"', a: 'JavaScript is fun and versatile', h: 'Async code made easy' },
         ];
         return sentences[Math.floor(Math.random() * sentences.length)];
       }
@@ -58,8 +57,6 @@ class PuzzleTimer {
       color: 'emoji',
       generate: () => {
         const puzzles = [
-          { q: '🧊🧋🐄 ➡️ ?', a: 'milkshake', h: 'Think drink + ice + cow' },
-          { q: '🐱📱 ➡️ ?', a: 'catcall', h: 'Combine cat + phone action' },
           { q: '🚗💨💥 ➡️ ?', a: 'crash', h: 'What happens when car speeds up too fast?' },
           { q: '🦄🌈✨ ➡️ ?', a: 'magic', h: 'Mythical and sparkly' },
           { q: '🍞🥓🍳 ➡️ ?', a: 'breakfast', h: 'Common morning combo' }
@@ -112,8 +109,7 @@ class PuzzleTimer {
       }
     }
   
-  
-  // Game State Management
+ 
   let gameState = {
     currentRoom: null,
     score: 0,
@@ -128,7 +124,7 @@ class PuzzleTimer {
   
   let timer = null;
   
-  // DOM Elements
+  
   const elements = {
     nameSection: document.getElementById('nameSection'),
     roomSelection: document.getElementById('roomSelection'),
@@ -156,7 +152,6 @@ class PuzzleTimer {
     finalRooms: document.getElementById('finalRooms')
   };
   
-  // Game Logic Functions
   
   const generatePuzzle = (roomId) => {
     const puzzleType = puzzles[roomId];
@@ -173,7 +168,7 @@ class PuzzleTimer {
     const roomOrder = ['typing', 'emoji', 'riddle', 'scramble'];
     const roomIndex = roomOrder.indexOf(roomId);
 
-// Check if previous room is completed
+
 if (roomIndex > 0) {
   const previousRoom = roomOrder[roomIndex - 1];
   if (!gameState.completedRooms.has(previousRoom)) {
@@ -191,7 +186,6 @@ if (roomIndex > 0) {
       showToast('Error generating puzzle!', 'error');
       return;
     }
-    // Initialize timer
     if (timer) timer.stop();
     timer = new PuzzleTimer(
       (time) => updateTimer(time),
@@ -246,7 +240,7 @@ if (roomIndex > 0) {
   const handleCorrectAnswer = () => {
     if (timer) timer.stop();
     
-    // Calculate score with time bonus and combo
+   
     const timeBonus = gameState.timeLeft * 10;
     const comboBonus = gameState.combo * 50;
     const totalPoints = 100 + timeBonus + comboBonus;
@@ -254,13 +248,18 @@ if (roomIndex > 0) {
     gameState.score += totalPoints;
     gameState.combo++;
     gameState.completedRooms.add(gameState.currentRoom);
-    
+
+    // Set localStorage for room3Completed if current room is 'scramble'
+  if (gameState.currentRoom === 'scramble') {
+    localStorage.setItem("room3Completed", "true");
+  }
+  
     showToast(`Correct! +${totalPoints} points (Combo x${gameState.combo})`, 'success');
      showCongratsBox();
         
     
       
-    // Check if all rooms completed
+   
     if (gameState.completedRooms.size >= 4) {
       setTimeout(() => showCompletion(), 1500);
     } else {
@@ -306,7 +305,7 @@ if (roomIndex > 0) {
     elements.timerText.textContent = time;
     elements.timeValue.textContent = time;
     
-    // Update timer appearance based on remaining time
+    
     elements.timerCircle.className = 'timer-circle';
     if (time <= 10) {
       elements.timerCircle.classList.add('danger');
@@ -323,14 +322,14 @@ if (roomIndex > 0) {
   };
   
   const showSection = (section) => {
-    // Hide all sections
+  
     Object.values(elements).forEach(el => {
       if (el && el.style && (el.id.includes('Section') || el.id.includes('section'))) {
         el.style.display = 'none';
       }
     });
     
-    // Show target section
+   
     const targetElement = elements[section] || document.getElementById(section);
     if (targetElement) {
       targetElement.style.display = 'block';
@@ -386,7 +385,7 @@ if (roomIndex > 0) {
     showToast('Game reset! Ready for a new challenge?', 'success');
   };
   
-  // Toast Notification System
+ 
   const showToast = (message, type = 'success') => {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -394,14 +393,13 @@ if (roomIndex > 0) {
     
     elements.toastContainer.appendChild(toast);
     
-    // Remove toast after 3 seconds
     setTimeout(() => {
       if (toast.parentNode) {
         toast.parentNode.removeChild(toast);
       }
     }, 3000);
   };
-  // Cleanup on page unload
+
   window.addEventListener('beforeunload', () => {
     if (timer) timer.stop();
   });
@@ -416,9 +414,19 @@ if (roomIndex > 0) {
     showSection('roomSelection');
   };
   document.addEventListener('DOMContentLoaded', () => {
-    showSection('roomSelection'); // Skip name screen
-    elements.gameStats.style.display = 'flex'; // Show stats bar
+    showSection('roomSelection'); 
+    elements.gameStats.style.display = 'flex'; 
     updateStats();
     showToast('Welcome! Choose your first challenge.', 'success');
   });
+  // Disable copy, cut, paste in answer input
+elements.answerInput.addEventListener('copy', (e) => e.preventDefault());
+elements.answerInput.addEventListener('cut', (e) => e.preventDefault());
+elements.answerInput.addEventListener('paste', (e) => e.preventDefault());
+
+// Disable right click on question and input (optional)
+elements.puzzleQuestion.addEventListener('contextmenu', e => e.preventDefault());
+elements.answerInput.addEventListener('contextmenu', e => e.preventDefault());
+
+localStorage.setItem("room3Completed", "true");
   
