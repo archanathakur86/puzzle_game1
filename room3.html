@@ -12,7 +12,7 @@
 </head>
 <body>
     <style>
-        /* Cyber Puzzle Game - Pure CSS Design System */
+        
 
 :root {
   /* Cyber Dark Theme Colors */
@@ -63,6 +63,12 @@
   --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-glow: box-shadow 0.3s ease, transform 0.3s ease;
 }
+  #puzzleQuestion {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
 * {
   margin: 0;
@@ -104,7 +110,7 @@ body {
   gap: 2rem;
 }
 
-/* Header */
+
 .header {
   text-align: center;
   margin-bottom: 2rem;
@@ -141,7 +147,7 @@ body {
   font-weight: 300;
 }
 
-/* Game Stats */
+
 .stats {
   display: flex;
   gap: 2rem;
@@ -174,7 +180,7 @@ body {
   text-shadow: 0 0 10px hsla(270, 100%, 65%, 0.8);
 }
 
-/* Cards */
+
 .card, .room-card, .puzzle-card, .completion-card {
   background: var(--gradient-dark);
   border: 1px solid hsla(270, 100%, 65%, 0.2);
@@ -189,7 +195,7 @@ body {
   box-shadow: var(--glow-primary);
 }
 
-/* Name Section */
+
 .name-section {
   width: 100%;
   max-width: 400px;
@@ -203,7 +209,7 @@ body {
   color: var(--primary);
 }
 
-/* Room Selection */
+
 .room-selection {
   width: 100%;
   text-align: center;
@@ -269,7 +275,6 @@ body {
 .room-color.pattern { background: linear-gradient(135deg, var(--cyber-warning), var(--cyber-info)); }
 .room-color.color { background: linear-gradient(135deg, var(--cyber-success), var(--destructive)); }
 
-/* Puzzle Section */
 .puzzle-section {
   width: 100%;
   max-width: 600px;
@@ -356,7 +361,6 @@ body {
   font-style: italic;
 }
 
-/* Completion Section */
 .completion-section {
   width: 100%;
   max-width: 500px;
@@ -395,7 +399,7 @@ body {
   color: var(--primary);
 }
 
-/* Form Elements */
+
 .input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -417,7 +421,7 @@ body {
   color: var(--muted-foreground);
 }
 
-/* Buttons */
+
 .btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -466,7 +470,6 @@ body {
   box-shadow: var(--glow-accent);
 }
 
-/* Toast Notifications */
 .toast-container {
   position: fixed;
   top: 1rem;
@@ -503,7 +506,6 @@ body {
   box-shadow: 0 0 30px hsla(45, 100%, 65%, 0.5);
 }
 
-/* Animations */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: var(--glow-primary); }
   50% { box-shadow: 0 0 50px hsla(270, 100%, 65%, 0.8), 0 0 100px hsla(270, 100%, 65%, 0.4); }
@@ -524,7 +526,7 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
@@ -572,12 +574,11 @@ body {
 }
     </style>
     <div class="app">
-        <!-- Background -->
+      
         <div class="background"></div>
-        
-        <!-- Main Container -->
+       
         <div class="container">
-            <!-- Header -->
+          
             <header class="header">
                 <h1 class="title">
                     <span class="title-main">PUZZLE MAZE</span>
@@ -586,7 +587,7 @@ body {
                 <p class="subtitle">Welcome to the Mind Maze Challenge</p>
             </header>
           
-            <!-- Game Stats -->
+           
             <div class="stats" id="gameStats" style="display: none;">
                 <div class="stat-item">
                     <span class="stat-label">Score</span>
@@ -608,7 +609,6 @@ body {
 
             
 
-            <!-- Room Selection -->
             <div class="room-selection" id="roomSelection" style="display: none;">
                 <h2 class="section-title">Choose Your Challenge</h2>
                 <div class="rooms-grid">
@@ -642,7 +642,6 @@ body {
 
             </div>
         
-            <!-- Active Puzzle -->
             <div class="puzzle-section" id="puzzleSection" style="display: none;">
                 <div class="puzzle-card">
                     <div class="puzzle-header">
@@ -676,7 +675,7 @@ body {
                 <button onclick="goBackToRoom()" class="btn btn-secondary">← Back to Rooms</button>
             </div>
 
-            <!-- Completion Screen -->
+
             <div class="completion-section" id="completionSection" style="display: none;">
                 <div class="completion-card">
                     <h2>🎉 MISSION ACCOMPLISHED!</h2>
@@ -699,10 +698,10 @@ body {
             </div>
         </div>
 
-        <!-- Toast Notifications -->
+      
         <div class="toast-container" id="toastContainer"></div>
     </div>
-<!-- Dark Themed Congratulations Popup -->
+
 <div id="congratsBox" class="hidden" style="
   position: fixed;
   top: 50%;
