@@ -41,9 +41,9 @@ class PuzzleTimer {
       color: 'typing',
       generate: () => {
         const sentences = [
-          { q: 'Type: "Learning never exhausts the mind."', a: 'Learning never exhausts the mind', h: 'A famous quote by Leonardo da Vinci' },
-          { q: 'Type: "The quick brown fox jumps over the lazy dog."', a: 'The quick brown fox jumps over the lazy dog', h: 'Classic sentence with every alphabet' },
-          { q: 'Type: "Consistency beats intensity."', a: 'Consistency beats intensity', h: 'Small efforts daily > big bursts rarely' },
+          { q: 'Type: "Learning never exhausts the mind"', a: 'Learning never exhausts the mind', h: 'A famous quote by Leonardo da Vinci' },
+          { q: 'Type: "The quick brown fox jumps over the lazy dog"', a: 'The quick brown fox jumps over the lazy dog', h: 'Classic sentence with every alphabet' },
+          { q: 'Type: "Consistency beats intensity"', a: 'Consistency beats intensity', h: 'Small efforts daily > big bursts rarely' },
           { q: 'Type: "JavaScript is fun and versatile"', a: 'JavaScript is fun and versatile', h: 'Async code made easy' },
         ];
         return sentences[Math.floor(Math.random() * sentences.length)];
