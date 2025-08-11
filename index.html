@@ -15,12 +15,12 @@
       font-family: 'Segoe UI', sans-serif;
       background: #2e2b3f;
       color: #fff;
-      animation: fadeIn 1.8s ease-in;
       padding: 40px 20px 80px;
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
+      animation: fadeIn 1.5s ease-in;
     }
 
     @keyframes fadeIn {
@@ -36,9 +36,8 @@
       align-items: flex-start;
       max-width: 1400px;
       width: 100%;
-      flex:1;
     }
-     
+
     .main-container {
       display: flex;
       flex-direction: column;
@@ -53,17 +52,8 @@
       border-radius: 20px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.4);
       width: 100%;
-      animation: fadeIn 1.5s ease-in-out;
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .level-box:hover, .game-showcase:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .level-title {
@@ -73,7 +63,6 @@
       text-align: center;
       margin-bottom: 20px;
       text-shadow: 2px 2px 10px rgba(0, 229, 255, 0.7);
-      animation: glowTitle 2s infinite ease-in-out;
     }
 
     .room {
@@ -92,10 +81,6 @@
       margin-right: 25px;
       object-fit: cover;
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    .room-info {
-      flex: 1;
     }
 
     .room-info h3 {
@@ -212,7 +197,6 @@
       font-weight: 900;
       color: #fff;
       text-shadow: 3px 3px 10px #a020f0, 0 0 20px #7b68ee;
-      animation: glowText 2s ease-in-out infinite alternate;
       letter-spacing: 5px;
     }
 
@@ -231,6 +215,13 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .completion-text {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #ddd;
+      text-align: center;
     }
 
     @media screen and (max-width: 768px) {
@@ -268,7 +259,6 @@
     Your browser does not support the video tag.
   </video>
 
-  <!-- Logo and Title -->
   <div class="custom-header">
     <img src="images/logo.png" alt="Logo" />
     <div class="title">
@@ -277,7 +267,6 @@
     </div>
   </div>
 
-  <!-- Main content -->
   <div class="main-wrapper">
     <div class="main-container">
       <div class="level-box">
@@ -287,7 +276,7 @@
           <div class="room-info">
             <h3>Room 1</h3>
             <p>Intro to basic concepts and logical flow.</p>
-            <a href="escape.html" class="room-button" id="room1-btn" target="_blank">Enter Room 1</a>
+              <a href="escape.html" class="room-button" id="room1-btn" target="_blank">Enter Room 1</a>
           </div>
         </div>
       </div>
@@ -299,7 +288,7 @@
           <div class="room-info">
             <h3>Room 2</h3>
             <p>Advance challenges with logical puzzles.</p>
-            <a href="es6.html" class="room-button" id="room2-btn">Enter Room 2</a>
+             <a href="es6.html" class="room-button" id="room2-btn">Enter Room 2</a>
           </div>
         </div>
         <div class="room">
@@ -307,7 +296,7 @@
           <div class="room-info">
             <h3>Room 3</h3>
             <p>Creative problem-solving with modules.</p>
-            <a href="room3.html" class="room-button" id="room3-btn">Enter Room 3</a>
+           <a href="room3.html" class="room-button" id="room3-btn">Enter Room 3</a>
           </div>
         </div>
       </div>
@@ -318,13 +307,12 @@
         <div class="progress-bar">
           <div class="progress"></div>
         </div>
-        <p style="margin-top: 10px; font-size: 16px; color: #ddd; text-align: center;">
+        <p class="completion-text">
           Game Completion: <strong>75%</strong>
         </p>
       </div>
     </div>
 
-    <!-- Right Panel -->
     <div class="right-panel">
       <div class="heading-top">🧩 Puzzle Maze</div>
       <div class="image-wrapper">
@@ -334,23 +322,22 @@
       </div>
     </div>
   </div>
-  <script>
+    <script>
     // Simulate Room 1 completion - you would normally trigger this from inside escape.html when completed
     // Example: localStorage.setItem("room1Completed", "true");
-  
-    document.getElementById("room2-btn").addEventListener("click", function (e) {
-      if (localStorage.getItem("room1Completed") !== "true") {
-        e.preventDefault();
-        alert("🚫 Please complete Room 1 before entering Room 2!");
-      }
-    });
-  
-    document.getElementById("room3-btn").addEventListener("click", function (e) {
-      if (localStorage.getItem("room2Completed") !== "true") {
-        e.preventDefault();
-        alert("🚫 Please complete Room 2 before entering Room 3!");
-      }
-    });
+  document.getElementById("room2-btn").addEventListener("click", function (e) {
+  if (localStorage.getItem("room1Completed") !== "true") {
+    e.preventDefault();
+    alert("🚫 Please complete Room 1 before entering Room 2!");
+  }
+});
+
+document.getElementById("room3-btn").addEventListener("click", function (e) {
+  if (localStorage.getItem("room2Completed") !== "true") {
+    e.preventDefault();
+    alert("🚫 Please complete Room 2 before entering Room 3!");
+  }
+});
   </script>  
 </body>
 </html>
