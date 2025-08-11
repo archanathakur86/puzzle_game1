@@ -32,7 +32,6 @@ class PuzzleTimer {
     };
   }
   
-  // Puzzle Definitions with ES6 Arrow Functions
   const puzzles = {
     math: {
       id: 'math',
@@ -92,18 +91,15 @@ class PuzzleTimer {
       color: 'pattern',
       generate: () => {
         const patternPuzzles = [
-          { q: 'Pattern: ○ ● ○ ● ○ ?', a: '●', h: 'Alternating circles' },
           { q: 'Sequence: 1, 1, 2, 3, 5, 8, ?', a: '13', h: 'Each number is sum of previous two' },
           { q: 'Pattern: AZ, BY, CX, ?', a: 'dw', h: 'First letter goes up, second goes down' },
           { q: 'Numbers: 2, 6, 12, 20, 30, ?', a: '42', h: 'Differences: 4, 6, 8, 10, 12' },
-          { q: 'Shape sequence: △ □ ○ △ □ ?', a: '○', h: 'Three shapes repeating' }
         ];
         return patternPuzzles[Math.floor(Math.random() * patternPuzzles.length)];
       }
     },
   };
   
-  // Game State Management
   let gameState = {
     currentRoom: null,
     score: 0,
@@ -118,7 +114,6 @@ class PuzzleTimer {
   
   let timer = null;
   
-  // DOM Elements
   const elements = {
     nameSection: document.getElementById('nameSection'),
     roomSelection: document.getElementById('roomSelection'),
@@ -146,7 +141,7 @@ class PuzzleTimer {
     finalRooms: document.getElementById('finalRooms')
   };
   
-  // Game Logic Functions
+
   
   const generatePuzzle = (roomId) => {
     const puzzleType = puzzles[roomId];
@@ -158,26 +153,10 @@ class PuzzleTimer {
       id: `${roomId}_${Date.now()}`
     };
   };
-  
-  const startGame = () => {
-    const playerName = elements.playerNameInput.value.trim();
-    if (!playerName) {
-      showToast('Please enter your hacker name!', 'warning');
-      return;
-    }
-    
-    gameState.playerName = playerName;
-    showSection('roomSelection');
-    elements.gameStats.style.display = 'flex';
-    updateStats();
-    showToast(`Welcome, ${playerName}! Choose your first challenge.`, 'success');
-  };
-  
   const startRoom = (roomId) => {
     const roomOrder = ['math', 'logic', 'word', 'pattern', 'room3'];
     const roomIndex = roomOrder.indexOf(roomId);
 
-// Check if previous room is completed
 if (roomIndex > 0) {
   const previousRoom = roomOrder[roomIndex - 1];
   if (!gameState.completedRooms.has(previousRoom)) {
@@ -196,7 +175,6 @@ if (roomIndex > 0) {
       return;
     }
     
-    // Initialize timer
     if (timer) timer.stop();
     timer = new PuzzleTimer(
       (time) => updateTimer(time),
@@ -251,7 +229,7 @@ if (roomIndex > 0) {
   const handleCorrectAnswer = () => {
     if (timer) timer.stop();
     
-    // Calculate score with time bonus and combo
+   
     const timeBonus = gameState.timeLeft * 10;
     const comboBonus = gameState.combo * 50;
     const totalPoints = 100 + timeBonus + comboBonus;
@@ -265,7 +243,7 @@ if (roomIndex > 0) {
         
     
       
-    // Check if all rooms completed
+    
     const room2Puzzles = ['math', 'logic', 'word', 'pattern'];
     const allRoom2Completed = room2Puzzles.every(p => gameState.completedRooms.has(p));
     
@@ -289,9 +267,9 @@ if (roomIndex > 0) {
       
   };
   function goToRoom3() {
-    const room2Puzzles = [ 'math','logic', 'word', 'pattern']; // all Room 2 puzzles
+    const room2Puzzles = [ 'math','logic', 'word', 'pattern']; 
   
-    // Check if all puzzles from Room 2 are completed
+    
     const allRoom2Completed = room2Puzzles.every(p => gameState.completedRooms.has(p));
   
     if (!allRoom2Completed) {
@@ -300,10 +278,9 @@ if (roomIndex > 0) {
     }
   
       
-    // Redirect to your Room 3 page
-    window.location.href = 'http://127.0.0.1:5500/room3.html';  // Replace with your actual file name
+    
+    window.location.href = 'http://127.0.0.1:5500/room3.html';
   }
-  
   const handleIncorrectAnswer = () => {
     gameState.combo = 0;
     showToast('Incorrect answer. Try again!', 'error');
@@ -339,7 +316,7 @@ if (roomIndex > 0) {
     elements.timerText.textContent = time;
     elements.timeValue.textContent = time;
     
-    // Update timer appearance based on remaining time
+   
     elements.timerCircle.className = 'timer-circle';
     if (time <= 10) {
       elements.timerCircle.classList.add('danger');
@@ -356,14 +333,13 @@ if (roomIndex > 0) {
   };
   
   const showSection = (section) => {
-    // Hide all sections
+  
     Object.values(elements).forEach(el => {
       if (el && el.style && (el.id.includes('Section') || el.id.includes('section'))) {
         el.style.display = 'none';
       }
     });
-    
-    // Show target section
+ 
     const targetElement = elements[section] || document.getElementById(section);
     if (targetElement) {
       targetElement.style.display = 'block';
@@ -419,7 +395,6 @@ if (roomIndex > 0) {
     showToast('Game reset! Ready for a new challenge?', 'success');
   };
   
-  // Toast Notification System
   const showToast = (message, type = 'success') => {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -427,7 +402,7 @@ if (roomIndex > 0) {
     
     elements.toastContainer.appendChild(toast);
     
-    // Remove toast after 3 seconds
+   
     setTimeout(() => {
       if (toast.parentNode) {
         toast.parentNode.removeChild(toast);
@@ -435,7 +410,7 @@ if (roomIndex > 0) {
     }, 3000);
   };
   
-  // Cleanup on page unload
+
   window.addEventListener('beforeunload', () => {
     if (timer) timer.stop();
   });
@@ -450,10 +425,13 @@ if (roomIndex > 0) {
     showSection('roomSelection');
   };
   document.addEventListener('DOMContentLoaded', () => {
-    showSection('roomSelection'); // Skip name screen
-    elements.gameStats.style.display = 'flex'; // Show stats bar
+    showSection('roomSelection'); 
+    elements.gameStats.style.display = 'flex';
     updateStats();
     showToast('Welcome! Choose your first challenge.', 'success');
   });
-  localStorage.setItem("room2Completed", "true");
+
+  
+// When puzzle solved:
+localStorage.setItem("room2Completed", "true");
 
