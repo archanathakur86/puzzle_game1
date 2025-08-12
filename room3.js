@@ -249,7 +249,7 @@ if (roomIndex > 0) {
     gameState.combo++;
     gameState.completedRooms.add(gameState.currentRoom);
 
-    // Set localStorage for room3Completed if current room is 'scramble'
+    
   if (gameState.currentRoom === 'scramble') {
     localStorage.setItem("room3Completed", "true");
   }
@@ -419,12 +419,11 @@ if (roomIndex > 0) {
     updateStats();
     showToast('Welcome! Choose your first challenge.', 'success');
   });
-  // Disable copy, cut, paste in answer input
+
 elements.answerInput.addEventListener('copy', (e) => e.preventDefault());
 elements.answerInput.addEventListener('cut', (e) => e.preventDefault());
 elements.answerInput.addEventListener('paste', (e) => e.preventDefault());
 
-// Disable right click on question and input (optional)
 elements.puzzleQuestion.addEventListener('contextmenu', e => e.preventDefault());
 elements.answerInput.addEventListener('contextmenu', e => e.preventDefault());
 
