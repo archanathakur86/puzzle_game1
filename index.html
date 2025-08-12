@@ -54,7 +54,6 @@
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-
     .level-title {
       font-size: 36px;
       font-weight: 900;
@@ -95,7 +94,6 @@
       font-weight: 500;
       line-height: 1.4;
     }
-
     .room-button {
       display: inline-block;
       padding: 10px 20px;
@@ -290,6 +288,7 @@
              <a href="es6.html" class="room-button" id="room2-btn">Enter Room 2</a>
           </div>
         </div>
+        
         <div class="room">
           <img src="images/game3.webp" alt="Room 3">
           <div class="room-info">
@@ -322,6 +321,7 @@
     </div>
   </div>
     <script>
+      
   document.getElementById("room2-btn").addEventListener("click", function (e) {
   if (localStorage.getItem("room1Completed") !== "true") {
     e.preventDefault();
