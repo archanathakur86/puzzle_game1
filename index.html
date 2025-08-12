@@ -10,7 +10,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #2e2b3f;
@@ -323,8 +322,6 @@
     </div>
   </div>
     <script>
-    // Simulate Room 1 completion - you would normally trigger this from inside escape.html when completed
-    // Example: localStorage.setItem("room1Completed", "true");
   document.getElementById("room2-btn").addEventListener("click", function (e) {
   if (localStorage.getItem("room1Completed") !== "true") {
     e.preventDefault();
