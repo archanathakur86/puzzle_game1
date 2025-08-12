@@ -279,7 +279,7 @@ if (roomIndex > 0) {
   
       
     
-    window.location.href = 'http://127.0.0.1:5500/room3.html';
+    window.location.href = 'room3.html';
   }
   const handleIncorrectAnswer = () => {
     gameState.combo = 0;
