@@ -431,7 +431,5 @@ if (roomIndex > 0) {
     showToast('Welcome! Choose your first challenge.', 'success');
   });
 
-  
-// When puzzle solved:
 localStorage.setItem("room2Completed", "true");
 
